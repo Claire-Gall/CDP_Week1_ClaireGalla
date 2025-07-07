@@ -1,2 +1,2 @@
-# CDP_Week1_ClaireGalla
+# ComputationalDesignWorkflows_ClaireGalla
 
