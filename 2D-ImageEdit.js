@@ -1,16 +1,26 @@
 // 2D Drawing Sketch - using p5.js instance mode
 var sketch1 = function (p) {
     // All variables are scoped to this instance
-    var canvasWidth = 800;
-    var canvasHeight = 400;
-    var gridSpacing = 40;
+    var canvasWidth = 1000;
+    var canvasHeight = 600;
+    var gridSpacing = 50;
     var canvas;
 
-    p.setup = function () {
-        canvas = p.createCanvas(canvasWidth, canvasHeight);
-        canvas.parent('canvas-container-1');
-    };
+    let img;
 
+    // Load the image and create a p5.Image object.
+    function preload() {
+        img = loadImage('/digital drawing experiments/fogcollector_1043.jpg');
+    }
+
+    function setup() {
+        createCanvas(100, 100);
+
+        // Draw the image.
+        image(img, 0, 0);
+
+        describe(');
+    }
     p.draw = function () {
         p.background(250);
         drawGrid();
