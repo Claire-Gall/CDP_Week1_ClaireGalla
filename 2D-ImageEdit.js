@@ -1,31 +1,40 @@
-// 2D Drawing Sketch - using p5.js instance mode
 var sketch1 = function (p) {
-    // All variables are scoped to this instance
     var canvasWidth = 1000;
     var canvasHeight = 600;
     var gridSpacing = 50;
-    var canvas;
+    var img = null;
+    var input;
 
-    let img;
+    p.setup = function () {
+        p.createCanvas(canvasWidth, canvasHeight);
+        p.background(255);
 
-    // Load the image and create a p5.Image object.
-    function preload() {
-        img = loadImage('/digital drawing experiments/fogcollector_1043.jpg');
-    }
+        // Create file input element for uploading image
+        input = p.createFileInput(handleFile);
+        input.position(10, canvasHeight + 20); // adjust position below canvas
+    };
 
-    function setup() {
-        createCanvas(100, 100);
-
-        // Draw the image.
-        image(img, 0, 0);
-
-        describe(');
-    }
     p.draw = function () {
-        p.background(250);
+        p.background(255);
+
+        if (img) {
+            // Draw uploaded image as background
+            p.image(img, 0, 0, canvasWidth, canvasHeight);
+        }
+
         drawGrid();
         drawPrimitives();
     };
+
+    function handleFile(file) {
+        if (file.type === 'image') {
+            img = p.loadImage(file.data, () => {
+                console.log('Image loaded successfully');
+            });
+        } else {
+            img = null;
+        }
+    }
 
     function drawGrid() {
         p.stroke(200);
@@ -40,21 +49,24 @@ var sketch1 = function (p) {
 
     function drawPrimitives() {
         // Rectangle
-        p.fill(255, 100, 100);
+        p.fill(255, 100, 100, 200);
+        p.noStroke();
         p.rect(120, 80, 100, 60);
+
         // Ellipse
-        p.fill(100, 180, 255);
+        p.fill(100, 180, 255, 180);
         p.ellipse(350, 200, 90, 90);
+
         // Line
         p.stroke(80, 200, 120);
         p.strokeWeight(4);
         p.line(500, 100, 700, 300);
+
         // Triangle
         p.noStroke();
-        p.fill(255, 220, 80);
+        p.fill(255, 220, 80, 180);
         p.triangle(600, 80, 750, 60, 700, 200);
     }
 };
 
-// Create the instance
-var myp5_1 = new p5(sketch1, 'canvas-container-1'); 
+var myp5_1 = new p5(sketch1, 'canvas-container-1');
