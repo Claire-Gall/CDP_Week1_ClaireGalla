@@ -1,44 +1,69 @@
-// Bouncing Ball Sketch - using p5.js instance mode
-var sketch2 = function (p) {
-    // All variables are scoped to this instance
-    var x, y; // Ball position
-    var dx, dy; // Ball velocity
-    var radius = 30; // Ball radius
+// p5.js // Particle Sketch - using p5.js instance mode
+function setup() {
+    let canvas = createCanvas(400, 400);
+    canvas.parent('movementpatternexperiment'); // Make sure your HTML has <div id="sketch1"></div>
+}
 
-    p.setup = function () {
-        // Create the canvas and attach it to the container
-        var canvas = p.createCanvas(800, 400);
-        canvas.parent('canvas-container-2');
+function draw() {
+    background(220);
+    // Your drawing code here
+}
 
-        // Initialize ball position and velocity
-        x = p.width / 2;
-        y = p.height / 2;
-        dx = 4;
-        dy = 3;
-    };
+// DOM content ready, manual animation part
+document.addEventListener('DOMContentLoaded', () => {
+const section = document.getElementById("movementpatternexperiment");
+    if (!section) {
+        console.error("Section with id 'movementpatternexperiment' not found.");
+        return;
+    }
 
-    p.draw = function () {
-        // Clear the background
-        p.background(240);
+    const img = document.createElement("png");
+    img.src = "willowtreeroots.jpg";
+    img.alt = "Moving Image";
+    Object.assign(img.style, {
+        width: "300px",
+        opacity: "0",
+        transition: "opacity 2s ease-in-out, transform 2s ease-in-out",
+        display: "block",
+        position: "relative",
+        margin: "20px 0",
+        transform: "translateX(0px)"
+    });
 
-        // Draw the ball
-        p.fill(100, 180, 255);
-        p.noStroke();
-        p.ellipse(x, y, radius * 2);
+    const startBtn = document.createElement("button");
+    startBtn.textContent = "Start Animation";
+    Object.assign(startBtn.style, { padding: "10px 15px", margin: "5px", fontSize: "16px" });
 
-        // Update ball position
-        x += dx;
-        y += dy;
+    const stopBtn = document.createElement("button");
+    stopBtn.textContent = "Stop Animation";
+    Object.assign(stopBtn.style, { padding: "10px 15px", margin: "5px", fontSize: "16px" });
 
-        // Bounce off the edges
-        if (x - radius < 0 || x + radius > p.width) {
-            dx *= -1;
+    section.appendChild(img);
+    section.appendChild(startBtn);
+    section.appendChild(stopBtn);
+
+    let visible = false;
+    let fadeInterval = null;
+    let posX = 0;
+
+    function toggleAnimation() {
+        visible = !visible;
+        posX += 100;
+        img.style.opacity = visible ? "1" : "0";
+        img.style.transform = `translateX(${posX}px)`;
+    }
+
+    startBtn.addEventListener("click", () => {
+        if (!fadeInterval) {
+            toggleAnimation();
+            fadeInterval = setInterval(toggleAnimation, 3000);
         }
-        if (y - radius < 0 || y + radius > p.height) {
-            dy *= -1;
-        }
-    };
-};
+    });
 
-// Create the instance
-var myp5_2 = new p5(sketch2, 'canvas-container-2'); 
+    stopBtn.addEventListener("click", () => {
+        clearInterval(fadeInterval);
+        fadeInterval = null;
+    });
+startBtn.classList.add('start'); // optional, if you want a separate start class
+stopBtn.classList.add('stop');
+});
