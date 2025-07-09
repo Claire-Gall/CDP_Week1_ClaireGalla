@@ -4,8 +4,8 @@
 /* Style the entire body of the webpage */
 body {
   font-family: 'Times New Roman', sans-serif;  /* Set the font to Times New Roman, with sans-serif as backup */
-  background-color: hsl(0, 11%, 71%);          /* Set background color to white */
-  color: #a4a0a0;                        /* Set text color to dark gray (almost black) */
+  background-color: hsl(0, 0%, 100%);          /* Set background color to white */
+  color: #252323;                        /* Set text color to dark gray (almost black) */
   margin: 0;                          /* Remove default spacing around the body */
   padding: 0;                         /* Remove default internal spacing */
 }
