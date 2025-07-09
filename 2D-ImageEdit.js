@@ -1,72 +1,69 @@
-var sketch1 = function (p) {
-    var canvasWidth = 1000;
-    var canvasHeight = 600;
-    var gridSpacing = 50;
-    var img = null;
-    var input;
+// p5.js sketch part
+function setup() {
+    let canvas = createCanvas(400, 400);
+    canvas.parent('sketch1'); // Make sure your HTML has <div id="sketch1"></div>
+}
 
-    p.setup = function () {
-        p.createCanvas(canvasWidth, canvasHeight);
-        p.background(255);
+function draw() {
+    background(220);
+    // Your drawing code here
+}
 
-        // Create file input element for uploading image
-        input = p.createFileInput(handleFile);
-        input.position(10, canvasHeight + 20); // adjust position below canvas
-    };
-
-    p.draw = function () {
-        p.background(255);
-
-        if (img) {
-            // Draw uploaded image as background
-            p.image(img, 0, 0, canvasWidth, canvasHeight);
-        }
-
-        drawGrid();
-        drawPrimitives();
-    };
-
-    function handleFile(file) {
-        if (file.type === 'image') {
-            img = p.loadImage(file.data, () => {
-                console.log('Image loaded successfully');
-            });
-        } else {
-            img = null;
-        }
+// DOM content ready, manual animation part
+document.addEventListener('DOMContentLoaded', () => {
+const section = document.getElementById("image-reimagining");
+    if (!section) {
+        console.error("Section with id 'image-reimagining' not found.");
+        return;
     }
 
-    function drawGrid() {
-        p.stroke(200);
-        p.strokeWeight(1);
-        for (var x = 0; x <= p.width; x += gridSpacing) {
-            p.line(x, 0, x, p.height);
-        }
-        for (var y = 0; y <= p.height; y += gridSpacing) {
-            p.line(0, y, p.width, y);
-        }
+    const img = document.createElement("img");
+    img.src = "my-image.jpg"; // Replace with your actual image path
+    img.alt = "Moving Image";
+    Object.assign(img.style, {
+        width: "300px",
+        opacity: "0",
+        transition: "opacity 2s ease-in-out, transform 2s ease-in-out",
+        display: "block",
+        position: "relative",
+        margin: "20px 0",
+        transform: "translateX(0px)"
+    });
+
+    const startBtn = document.createElement("button");
+    startBtn.textContent = "Start Animation";
+    Object.assign(startBtn.style, { padding: "10px 15px", margin: "5px", fontSize: "16px" });
+
+    const stopBtn = document.createElement("button");
+    stopBtn.textContent = "Stop Animation";
+    Object.assign(stopBtn.style, { padding: "10px 15px", margin: "5px", fontSize: "16px" });
+
+    section.appendChild(img);
+    section.appendChild(startBtn);
+    section.appendChild(stopBtn);
+
+    let visible = false;
+    let fadeInterval = null;
+    let posX = 0;
+
+    function toggleAnimation() {
+        visible = !visible;
+        posX += 100;
+        img.style.opacity = visible ? "1" : "0";
+        img.style.transform = `translateX(${posX}px)`;
     }
 
-    function drawPrimitives() {
-        // Rectangle
-        p.fill(255, 100, 100, 200);
-        p.noStroke();
-        p.rect(120, 80, 100, 60);
+    startBtn.addEventListener("click", () => {
+        if (!fadeInterval) {
+            toggleAnimation();
+            fadeInterval = setInterval(toggleAnimation, 3000);
+        }
+    });
 
-        // Ellipse
-        p.fill(100, 180, 255, 180);
-        p.ellipse(350, 200, 90, 90);
-
-        // Line
-        p.stroke(80, 200, 120);
-        p.strokeWeight(4);
-        p.line(500, 100, 700, 300);
-
-        // Triangle
-        p.noStroke();
-        p.fill(255, 220, 80, 180);
-        p.triangle(600, 80, 750, 60, 700, 200);
-    }
-};
-
-var myp5_1 = new p5(sketch1, 'canvas-container-1');
+    stopBtn.addEventListener("click", () => {
+        clearInterval(fadeInterval);
+        fadeInterval = null;
+    });
+startBtn.classList.add('start'); // optional, if you want a separate start class
+stopBtn.classList.add('stop');
+});

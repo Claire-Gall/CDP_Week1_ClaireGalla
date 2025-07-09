@@ -1,44 +1,58 @@
-// Bouncing Ball Sketch - using p5.js instance mode
-var sketch2 = function (p) {
-    // All variables are scoped to this instance
-    var x, y; // Ball position
-    var dx, dy; // Ball velocity
-    var radius = 30; // Ball radius
+// Noise tends to look smoother with coordinates that are very close together
+// These values will be multiplied by the x and y coordinates to make the
+// resulting values very close together
+let xScale = 0.015;
+let yScale = 0.02;
 
-    p.setup = function () {
-        // Create the canvas and attach it to the container
-        var canvas = p.createCanvas(800, 400);
-        canvas.parent('canvas-container-2');
+let gapSlider;
+let gap;
+let offsetSlider;
+let offset;
 
-        // Initialize ball position and velocity
-        x = p.width / 2;
-        y = p.height / 2;
-        dx = 4;
-        dy = 3;
-    };
+function setup() {
+    createCanvas(400, 400);
 
-    p.draw = function () {
-        // Clear the background
-        p.background(240);
+    // Set up the sliders
+    gapSlider = createSlider(2, width / 10, width / 20);
+    gapSlider.changed(dotGrid);
+    gapSlider.mouseMoved(checkChanged);
+    offsetSlider = createSlider(0, 1000, 0);
+    offsetSlider.mouseMoved(checkChanged);
 
-        // Draw the ball
-        p.fill(100, 180, 255);
-        p.noStroke();
-        p.ellipse(x, y, radius * 2);
+    // Draw the grid
+    dotGrid();
+}
 
-        // Update ball position
-        x += dx;
-        y += dy;
+// When the mouse is moved over a slider
+// Draw the dot grid if something has changed
+function checkChanged() {
+    if (gap !== gapSlider.value()) {
+        dotGrid();
+    }
+    if (offset !== offsetSlider.value()) {
+        dotGrid();
+    }
+}
 
-        // Bounce off the edges
-        if (x - radius < 0 || x + radius > p.width) {
-            dx *= -1;
+function dotGrid() {
+    background(255);
+    noStroke();
+    fill(0);
+
+    // Get the current gap and offset values from the sliders
+    gap = gapSlider.value();
+    offset = offsetSlider.value();
+
+    // Loop through x and y coordinates, at increments set by gap
+    for (let x = gap / 2; x < width; x += gap) {
+        for (let y = gap / 2; y < height; y += gap) {
+            // Calculate noise value using scaled and offset coordinates
+            let noiseValue = noise((x + offset) * xScale, (y + offset) * yScale);
+
+            // Since noiseValue will be 0-1, multiply it by gap to set diameter to
+            // between 0 and the size of the gap between circles
+            let diameter = noiseValue * gap;
+            circle(x, y, diameter);
         }
-        if (y - radius < 0 || y + radius > p.height) {
-            dy *= -1;
-        }
-    };
-};
-
-// Create the instance
-var myp5_2 = new p5(sketch2, 'canvas-container-2'); 
+    }
+}

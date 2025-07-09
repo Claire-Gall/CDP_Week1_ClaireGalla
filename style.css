@@ -3,9 +3,9 @@
 
 /* Style the entire body of the webpage */
 body {
-  font-family: 'Calibri', sans-serif;  /* Set the font to Calibri, with sans-serif as backup */
+  font-family: 'Times New Roman', sans-serif;  /* Set the font to Times New Roman, with sans-serif as backup */
   background-color: hsl(0, 0%, 100%);          /* Set background color to white */
-  color: #cb311c;                        /* Set text color to dark gray (almost black) */
+  color: #a4a0a0;                        /* Set text color to dark gray (almost black) */
   margin: 0;                          /* Remove default spacing around the body */
   padding: 0;                         /* Remove default internal spacing */
 }
@@ -95,19 +95,22 @@ p {
   margin-bottom: 24px;                /* Add 24 pixels of space below each paragraph */
   color: #010a07;                        /* Set text color to dark gray (almost black) */
 }
-
 /* Style for our interactive button */
-button {
-  background-color: #111;             /* Set button background to dark gray */
-  color: white;                       /* Set button text color to white */
-  border: none;                       /* Remove the default button border */
-  padding: 12px 24px;                 /* Add 12px top/bottom, 24px left/right spacing inside */
-  font-size: 14px;                    /* Set button text size to 14 pixels */
-  font-weight: 400;                   /* Set font weight to normal */
-  cursor: pointer;                    /* Change mouse cursor to hand when hovering over button */
-  margin-bottom: 20px;                /* Add 20 pixels of space below the button */
-  transition: background-color 0.3s;  /* Smooth color change animation (0.3 seconds) */
-  border-radius: 4px;                 /* Add slightly rounded corners to the button */
+.toggle-button {
+  padding: 10px 15px;
+  margin: 10px auto;
+  font-size: 16px;
+  background-color: rgba(0, 123, 255, 0.8); /* semi-transparent blue */
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+  background-color: rgba(0, 123, 255, 1); /* fully opaque on hover */
 }
 
 /* Style for the message display area */
