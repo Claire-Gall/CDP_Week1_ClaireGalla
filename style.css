@@ -4,7 +4,7 @@
 /* Style the entire body of the webpage */
 body {
   font-family: 'Calibri', sans-serif;  /* Set the font to Calibri, with sans-serif as backup */
-  background-color: #f9f6f6;          /* Set background color to white */
+  background-color: hsl(0, 0%, 100%);          /* Set background color to white */
   color: #cb311c;                        /* Set text color to dark gray (almost black) */
   margin: 0;                          /* Remove default spacing around the body */
   padding: 0;                         /* Remove default internal spacing */
