@@ -22,7 +22,7 @@ header {
 
 /* Style the left section of the header */
 header .left {
-  color: #aaa;                        /* Set text color to light gray */
+  color: #131212;                        /* Set text color to light gray */
 }
 
 /* Style the center section of the header */
@@ -34,7 +34,7 @@ header .center {
 /* Style the span element inside the center section */
 header .center span {
   font-size: 12px;                    /* Make this text smaller (12 pixels) */
-  color: #888;                        /* Set text color to medium gray */
+  color: #100e0e;                        /* Set text color to medium gray */
 }
 
 /* Style links in the right section of the header */
