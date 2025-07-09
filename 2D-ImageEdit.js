@@ -1,4 +1,4 @@
-// p5.js sketch part
+// p5.js // Particle Sketch - using p5.js instance mode
 function setup() {
     let canvas = createCanvas(400, 400);
     canvas.parent('sketch1'); // Make sure your HTML has <div id="sketch1"></div>
