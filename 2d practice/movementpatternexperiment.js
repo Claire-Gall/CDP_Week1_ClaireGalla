@@ -17,7 +17,7 @@ const section = document.getElementById("movementpatternexperiment");
         return;
     }
 
-    const img = document.createElement("png");
+const img = document.createElement("img");
     img.src = "willowtreeroots.jpg";
     img.alt = "Moving Image";
     Object.assign(img.style, {

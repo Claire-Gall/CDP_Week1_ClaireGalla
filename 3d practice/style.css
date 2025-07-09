@@ -140,3 +140,35 @@ button:hover {
 #threejs-canvas {
   margin-bottom: 60px;                /* Extra space after the last canvas */
 }
+/* Specific styles for the atmospheric geometry Three.js sketch */{
+  margin: 0;
+  background-color: #e6f3ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#threejs-container-3 {
+  position: relative;
+  width: 800px;
+  height: 400px;
+  background: #e6f3ff;
+  box-shadow: 0 0 60px rgba(255, 255, 255, 0.3) inset;
+  overflow: hidden;
+}
+
+/* Add a visual fog/mist overlay */
+#threejs-container-3::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15) 0%, rgba(230,243,255,0.5) 100%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+canvas {
+  display: block;
+}
