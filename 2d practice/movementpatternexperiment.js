@@ -1,23 +1,25 @@
 // p5.js // Particle Sketch - using p5.js instance mode
-function setup() {
-    let canvas = createCanvas(400, 400);
-    canvas.parent('movementpatternexperiment'); // Make sure your HTML has <div id="sketch1"></div>
-}
 
-function draw() {
-    background(220);
-    // Your drawing code here
-}
+let movementSketch = (p) => {
+    p.setup = () => {
+        let canvas = p.createCanvas(400, 400);
+        canvas.parent('movementpatternexperiment');
+    };
 
+    p.draw = () => {
+        p.background(220);
+
+    };
+};
 // DOM content ready, manual animation part
 document.addEventListener('DOMContentLoaded', () => {
-const section = document.getElementById("movementpatternexperiment");
+    const section = document.getElementById("movementpatternexperiment");
     if (!section) {
         console.error("Section with id 'movementpatternexperiment' not found.");
         return;
     }
 
-const img = document.createElement("img");
+    const img = document.createElement("img");
     img.src = "willowtreeroots.jpg";
     img.alt = "Moving Image";
     Object.assign(img.style, {
@@ -64,6 +66,6 @@ const img = document.createElement("img");
         clearInterval(fadeInterval);
         fadeInterval = null;
     });
-startBtn.classList.add('start'); // optional, if you want a separate start class
-stopBtn.classList.add('stop');
+    startBtn.classList.add('start'); // optional, if you want a separate start class
+    stopBtn.classList.add('stop');
 });
